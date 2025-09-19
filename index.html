@@ -104,24 +104,33 @@
 </head>
 <body>
   <!-- ===== Nav ===== -->
-  <nav class="nav">
-    <div class="wrap">
-      <a class="brand" href="#home" aria-label="Go to top">Lakshay <span>Oberoi</span></a>
-      <div class="nav-links" role="navigation" aria-label="Primary">
-        <a href="#about">About</a>
-        <a href="#education">Education</a>
-        <a href="#experience">Experience</a>
-        <a href="#projects">Projects</a>
-        <a href="#skills">Skills</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div class="cta">
-        <a class="btn" href="mailto:lakshayoberoi1911@gmail.com">Email</a>
-        <!-- Replace # with your resume link (Google Drive / GitHub releases / direct PDF) -->
-        <a class="btn primary" href="#" target="_blank" rel="noopener">Download Résumé</a>
-      </div>
+ <nav class="nav">
+  <div class="wrap">
+    <a class="brand" href="#home" aria-label="Go to top">Lakshay <span>Oberoi</span></a>
+
+    <!-- Hamburger (only shows on mobile) -->
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+    <div class="nav-links" id="nav-links" role="navigation" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
     </div>
-  </nav>
+
+    <div class="cta">
+      <a class="btn" href="mailto:lakshayoberoi1911@gmail.com">Email</a>
+      <a class="btn primary" href="#" target="_blank" rel="noopener">Download Résumé</a>
+    </div>
+  </div>
+</nav>
+
 
   <!-- ===== Hero ===== -->
   <header id="home" class="hero">
@@ -361,6 +370,27 @@
   <script>
     // Year
     document.getElementById('y').textContent = new Date().getFullYear();
+  
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+  const links = document.querySelectorAll('#nav-links a');
+
+  // Toggle menu on hamburger click
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('active');
+  });
+
+  // Close menu when clicking a nav link
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+    });
+  });
+
+
+
   </script>
 </body>
 </html>
