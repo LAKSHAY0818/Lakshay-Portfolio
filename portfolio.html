@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lakshay Oberoi — Portfolio</title>
+  <meta name="description" content="Portfolio of Lakshay Oberoi — Final-year Computer Science student at Chitkara University. Projects in React, Node.js, Flutter, Firebase, and more." />
+  <meta name="color-scheme" content="light dark" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0c0f;
+      --card: #101218;
+      --fg: #e9eef5;
+      --muted: #a5afc0;
+      --brand: #6aa2ff;
+      --brand-2: #8ef0d1;
+      --border: #1a1f2b;
+      --shadow: 0 10px 30px rgba(0,0,0,.25);
+      --radius: 16px;
+      --radius-lg: 22px;
+      --maxw: 1100px;
+    }
+    @media (prefers-color-scheme: light) {
+      :root { --bg:#f7f9fc; --card:#ffffff; --fg:#0b1020; --muted:#5b6475; --border:#e8edf6; }
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--fg);line-height:1.55}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Container */
+    .wrap{max-width:var(--maxw);margin-inline:auto;padding:24px}
+
+    /* Navbar */
+    .nav{position:sticky;top:0;z-index:50;background:linear-gradient(180deg,rgba(11,12,15,.9),rgba(11,12,15,.65));backdrop-filter: blur(8px);border-bottom:1px solid var(--border)}
+    @media (prefers-color-scheme: light){.nav{background:rgba(255,255,255,.7)}}
+    .nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px}
+    .brand{font-weight:800;letter-spacing:.2px}
+    .brand span{opacity:.9}
+    .nav-links{display:flex;flex-wrap:wrap;gap:8px 14px}
+    .nav-links a{padding:8px 12px;border-radius:999px;border:1px solid transparent}
+    .nav-links a:hover{border-color:var(--border);background:var(--card)}
+    .cta{display:flex;gap:10px;align-items:center}
+    .btn{display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:999px;border:1px solid var(--border);background:var(--card);box-shadow:var(--shadow);font-weight:600}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand-2));color:#0b0c0f;border-color:transparent}
+
+    /* Hero */
+    .hero{padding:56px 0 28px}
+    .hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:28px;align-items:center}
+    .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:var(--card);color:var(--muted);font-size:14px}
+    h1{font-size:clamp(34px,5vw,56px);line-height:1.05;margin:14px 0 10px;letter-spacing:.2px}
+    .subtitle{font-size:clamp(16px,2.4vw,18px);color:var(--muted);max-width:60ch}
+    .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:24px}
+    .hero-card{border:1px solid var(--border);background:linear-gradient(180deg,rgba(255,255,255,.02),transparent);border-radius:var(--radius-lg);padding:18px}
+
+    /* Sections */
+    section{padding:28px 0}
+    .section-title{font-size:24px;margin:0 0 14px 0}
+    .kicker{display:inline-block;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+
+    /* Grid / Cards */
+    .grid{display:grid;gap:16px}
+    .grid.cols-2{grid-template-columns:repeat(2,1fr)}
+    .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+    @media (max-width:900px){.hero-grid{grid-template-columns:1fr}.grid.cols-2,.grid.cols-3{grid-template-columns:1fr}}
+
+    .card{border:1px solid var(--border);background:var(--card);border-radius:var(--radius);padding:18px;box-shadow:var(--shadow)}
+    .card h3{margin:0 0 6px 0;font-size:18px}
+    .meta{color:var(--muted);font-size:14px}
+
+    .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+    .tag{font-size:12px;color:var(--muted);border:1px dashed var(--border);padding:6px 10px;border-radius:999px}
+
+    /* Timeline */
+    .timeline{position:relative}
+    .timeline::before{content:"";position:absolute;left:10px;top:0;bottom:0;width:2px;background:var(--border)}
+    .tl-item{position:relative;padding-left:32px;margin:14px 0}
+    .tl-dot{position:absolute;left:4px;top:.5em;width:12px;height:12px;border-radius:50%;background:linear-gradient(135deg,var(--brand),var(--brand-2));box-shadow:0 0 0 4px color-mix(in oklab, var(--brand) 35%, transparent)}
+
+    /* Footer */
+    footer{border-top:1px solid var(--border);margin-top:24px}
+    .foot{padding:26px 0;color:var(--muted);font-size:14px;display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:center}
+
+    /* Utilities */
+    .sr{position:absolute;left:-9999px}
+    .muted{color:var(--muted)}
+    .sp-8{height:8px}
+    .sp-16{height:16px}
+    .sp-24{height:24px}
+    .sp-32{height:32px}
+    .pill{border:1px solid var(--border);border-radius:999px;padding:8px 12px;display:inline-flex;gap:8px;align-items:center}
+
+    html{scroll-behavior:smooth}
+  </style>
+</head>
+<body>
+  <!-- ===== Nav ===== -->
+  <nav class="nav">
+    <div class="wrap">
+      <a class="brand" href="#home" aria-label="Go to top">Lakshay <span>Oberoi</span></a>
+      <div class="nav-links" role="navigation" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#education">Education</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div class="cta">
+        <a class="btn" href="mailto:lakshayoberoi1911@gmail.com">Email</a>
+        <!-- Replace # with your resume link (Google Drive / GitHub releases / direct PDF) -->
+        <a class="btn primary" href="#" target="_blank" rel="noopener">Download Résumé</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ===== Hero ===== -->
+  <header id="home" class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="badge">Graduate CS @ Chitkara • GPA 8.74/10</span>
+        <h1>Building fast, scalable apps for the web and mobile.</h1>
+        <p class="subtitle">I’m Lakshay, a Computer Science student who enjoys turning ideas into polished experiences using React, Node.js, Flutter and Firebase. Exploring AI/ML and cloud along the way.</p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#projects">View My Work</a>
+          <!-- <a class="btn" href="https://github.com/hardixk" target="_blank" rel="noopener" aria-label="GitHub">GitHub</a> -->
+          <a class="btn" href="https://www.linkedin.com/in/lakshay-o-1417b3210/" target="_blank" rel="noopener" aria-label="LinkedIn">LinkedIn</a>
+        </div>
+      </div>
+      <div class="hero-card">
+        <div class="grid cols-2">
+          <div class="card">
+            <div class="kicker">Contact</div>
+            <div><strong>Phone:</strong> <span class="muted">+91 8168937976</span></div>
+            <div><strong>Email:</strong> <a href="mailto:lakshayoberoi1911@gmail.com">lakshayoberoi1911@gmail.com</a></div>
+          </div>
+          <div class="card">
+            <div class="kicker">Interests</div>
+            <div>Reading, Badminton, Fitness</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== About ===== -->
+  <section id="about">
+    <div class="wrap">
+      <div class="kicker">About</div>
+      <h2 class="section-title">A quick snapshot</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <p>I’m a developer who enjoys building end‑to‑end products—from crisp UIs to reliable APIs. Recently I’ve worked on an e‑commerce platform with Stripe payments, a Twitter‑like social app using Firebase, an interactive Canvas drawing tool, and a workflow automation app in Flutter.</p>
+          <p class="muted">Currently open to internships and full‑time opportunities in software engineering and product engineering.</p>
+        </div>
+        <div class="card">
+          <div class="kicker">What I value</div>
+          <ul>
+            <li>Clean, accessible interfaces</li>
+            <li>Performance and reliability</li>
+            <li>Thoughtful documentation</li>
+            <li>Simple solutions to real problems</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Education ===== -->
+  <section id="education">
+    <div class="wrap">
+      <div class="kicker">Education</div>
+      <h2 class="section-title">Chitkara University</h2>
+      <div class="timeline">
+        <div class="tl-item card">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <h3>B.E. in Computer Science — GPA 8.74/10</h3>
+          <div class="meta">Rajpura, Punjab</div>
+          <div class="sp-8"></div>
+          <div><strong>Relevant Coursework:</strong> Data Structures & Algorithms, Probability & Statistics,React,Node.js C++, Linear Algebra with Computational Applications</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Experience ===== -->
+  <section id="experience">
+    <div class="wrap">
+      <div class="kicker">Experience</div>
+      <h2 class="section-title">Where I’ve worked</h2>
+      <div class="timeline">
+        <div class="tl-item card">
+          <span class="tl-dot" aria-hidden="true"></span>
+          <h3>TECH LEARN — Marketing Intern</h3>
+          <div class="meta">Remote, India • Aug 2023 – Sep 2023</div>
+          <ul>
+            <li>Contributed to campaign management, market research, and content creation to help achieve marketing goals.</li>
+            <li>Built features for workflow automation including automated task management and real‑time notifications, improving team efficiency.</li>
+            <li>Strengthened analytical and adaptability skills while gaining practical industry insights.</li>
+          </ul>
+        </div>
+        <div class="tl-item card">
+  <span class="tl-dot" aria-hidden="true"></span>
+  <h3>Aagati Serve — Frontend Developer Intern</h3>
+  <div class="meta">Remote, India • Aug 2025 – Present</div>
+  <ul>
+    <li>Contributed to developing user interfaces for web applications, ensuring a seamless user experience.</li>
+    <li>Collaborated with the design and backend teams to implement features and improve functionality.</li>
+    <li>Maintained and optimized code for scalability and performance.</li>
+  </ul>
+</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Projects ===== -->
+  <section id="projects">
+    <div class="wrap">
+      <div class="kicker">Projects</div>
+      <h2 class="section-title">Things I’ve built</h2>
+
+      <div class="grid cols-3">
+        <article class="card">
+          <h3>Shopping Site</h3>
+          <div class="meta">React • Node.js • Express • MongoDB • Redux • Stripe API</div>
+          <p>Fully functional e‑commerce app with authentication, cart management, and Stripe payments; handled 500+ simulated transactions in testing.</p>
+          <ul class="tags">
+            <li class="tag">Auth</li>
+            <li class="tag">Stripe</li>
+            <li class="tag">Catalog</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Twitter Clone</h3>
+          <div class="meta">React • Firebase • Tailwind CSS • Firestore • React Router</div>
+          <p>Real‑time tweets, likes, and comments with Google OAuth; SPA navigation increased engagement metrics 2× in testing.</p>
+          <ul class="tags">
+            <li class="tag">Realtime</li>
+            <li class="tag">OAuth</li>
+            <li class="tag">SPA</li>
+          </ul>
+        </article>
+
+        <article class="card">
+          <h3>Canvas Website</h3>
+          <div class="meta">HTML5 Canvas API • CSS3 • JavaScript</div>
+          <p>Interactive drawing app supporting freehand drawing, erasing, color selection, brush sizing, and PNG export; optimized for low input latency.</p>
+          <ul class="tags">
+            <li class="tag">Canvas</li>
+            <li class="tag">Export PNG</li>
+            <li class="tag">Performance</li>
+          </ul>
+        </article>
+
+        <!-- <article class="card">
+          <h3>Defect Tracking App</h3>
+          <div class="meta">Flutter • Dart • Firebase</div>
+          <p>Automated workflow app with task management, real‑time notifications (FCM), and integrations to streamline operations and reduce manual effort.</p>
+          <ul class="tags">
+            <li class="tag">Automation</li>
+            <li class="tag">FCM</li>
+            <li class="tag">Integrations</li>
+          </ul>
+        </article> -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Skills ===== -->
+  <section id="skills">
+    <div class="wrap">
+      <div class="kicker">Skills</div>
+      <h2 class="section-title">What I use</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Languages</h3>
+          <div class="tags">
+            <span class="tag">Java</span>
+            <span class="tag">Python</span>
+            <span class="tag">C</span>
+            <span class="tag">C++</span>
+            <span class="tag">SQL</span>
+            <span class="tag">JavaScript</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Frameworks & Tools</h3>
+          <div class="tags">
+            
+            <span class="tag">PyTorch</span>
+            <span class="tag">Flask</span>
+            <span class="tag">Node.js</span>
+            <span class="tag">Firebase</span>
+            <span class="tag">React</span>
+            <span class="tag">Redux</span>
+          </div>
+        </div>
+        <div class="card">
+          <h3>Core Concepts</h3>
+          <div class="tags">
+            <span class="tag">OS</span>
+            <span class="tag">Compilers</span>
+            <span class="tag">Virtual Memory</span>
+            <span class="tag">Cache Memory</span>
+            <span class="tag">Encryption/Decryption</span>
+            <span class="tag">API Design</span>
+            <span class="tag">DB Normalization</span>
+            <span class="tag">Agile</span>
+            <span class="tag">Cloud</span>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Contact ===== -->
+  <section id="contact">
+    <div class="wrap">
+      <div class="kicker">Contact</div>
+      <h2 class="section-title">Let’s build something</h2>
+      <div class="grid cols-2">
+        <div class="card">
+          <p>Want to collaborate or have an opportunity that fits? I’d love to hear from you.</p>
+          <div class="sp-8"></div>
+          <div class="pill"><strong>📧</strong> <a href="mailto:lakshayoberoi1911@gmail.com">lakshayoberoi1911@gmail.com</a></div>
+          <div class="sp-8"></div>
+          <div class="pill"><strong>🔗</strong> <a href="https://www.linkedin.com/in/lakshay-o-1417b3210/" target="_blank" rel="noopener">LinkedIn</a></div>
+          <div class="sp-8"></div>
+          <!-- <div class="pill"><strong>💻</strong> <a href="https://github.com/hardixk" target="_blank" rel="noopener">GitHub</a></div> -->
+        </div>
+        <div class="card">
+          <h3>Quick info</h3>
+          <ul>
+            <li>Location: India</li>
+            <li>Open to: Internships • Full‑time SDE roles</li>
+            <li>Response time: usually within 24 hours</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap foot">
+      <span>© <span id="y"></span> Lakshay Oberoi</span>
+      <!-- <span class="muted">Made with HTML + CSS</span> -->
+    </div>
+  </footer>
+
+  <script>
+    // Year
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
